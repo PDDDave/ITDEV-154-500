@@ -51,7 +51,15 @@ public class Controller {
                     a.a4();
                     break;
                 case 5:
+                    long start, stop;
+                    long delta;
+                    double seconds;
+                    start = System.nanoTime();
                     v.printString(String.valueOf(a.a5()));
+                    stop = System.nanoTime();
+                    delta = (stop - start);
+                    seconds = (double) delta/1_000_000_000.0;
+                    v.printString("\nProcess takes " + seconds + " seconds");
                     break;
                 case 6:
                     a.a6();

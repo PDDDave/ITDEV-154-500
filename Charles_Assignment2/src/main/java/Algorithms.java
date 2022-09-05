@@ -13,24 +13,68 @@ import java.util.Arrays;
  * @author vvard
  */
 public class Algorithms {
+    DecimalFormat df = new DecimalFormat("#,###,###,###,##0.00");
 
     public String a1(int arr[]) {
-        return binarySearch(arr,3);
+        String result;
+        String m;
+        long start, stop;
+        long delta;
+        double seconds;
+        start = System.nanoTime();
+        result = binarySearch(arr,3);
+        stop = System.nanoTime();
+        delta = (stop - start);
+        seconds = (double) delta/1_000_000_000.0;
+        m = "\nProcess takes " + seconds + " seconds";
+        
+        return result + "\n" + m;
     }
 
     public String a2(int arr[]) {
-        return ascSort(arr);
+        String result;
+        String m;
+        long start, stop;
+        long delta;
+        double seconds;
+        start = System.nanoTime();
+        result = ascSort(arr);
+        stop = System.nanoTime();
+        delta = (stop - start);
+        seconds = (double) delta/1_000_000_000.0;
+        m = "\nProcess takes " + seconds + " seconds";
+        
+        return result + "\n" + m;
     }
 
     public void a3(int i) {
+        String result;
+        String m;
+        long start, stop;
+        long delta;
+        double seconds;
+        start = System.nanoTime();
         countdown(i);
+        stop = System.nanoTime();
+        delta = (stop - start);
+        seconds = (double) delta/1_000_000_000.0;
+        System.out.println("\nProcess takes " + seconds + " seconds");
     }
 
     public void a4() {
+        long start, stop;
+        long delta;
+        double seconds;
+        start = System.nanoTime();
         greet("Jay");
+        stop = System.nanoTime();
+        delta = (stop - start);
+        seconds = (double) delta/1_000_000_000.0;
+        System.out.println("\nProcess takes " + seconds + " seconds");
     }
 
     public int a5() {
+        
         return factorial(4);
     }
 
@@ -118,7 +162,7 @@ public class Algorithms {
     }
 
     private void fibonacci() {
-        DecimalFormat df = new DecimalFormat("#,###,###,###,##0.00");
+        
         
         int N = 5;
         long start, stop;
@@ -129,6 +173,7 @@ public class Algorithms {
             start = System.nanoTime();
             long fib = fibv1(N*i);
             stop = System.nanoTime();
+            System.out.println("F (" + N * i + ") = " + fib);
             delta = (stop - start);
             seconds = (double) delta/1_000_000_000.0;
             System.out.println("and takes " + seconds + " seconds\n");
