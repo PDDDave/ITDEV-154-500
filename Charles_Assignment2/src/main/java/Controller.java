@@ -1,3 +1,6 @@
+
+import java.util.Arrays;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -33,19 +36,22 @@ public class Controller {
     private void chooseAlgorithm(int inInt) {
         switch (inInt){
                 case 1:
-                    a.a1();
+                    int arr1[] = new int[]{1,3,5,7,9};
+                    v.printString(a.a1(arr1));
                     break;
                 case 2:
-                    a.a2();
+                    int arr2[] = new int[]{10,3,6,2,5};
+                    v.printString("Unsorted: \t" + Arrays.toString(arr2));
+                    v.printString("Sorted:   \t" + a.a2(arr2));
                     break;
                 case 3:
-                    a.a3();
+                    a.a3(10);
                     break;
                 case 4:
                     a.a4();
                     break;
                 case 5:
-                    a.a5();
+                    v.printString(String.valueOf(a.a5()));
                     break;
                 case 6:
                     a.a6();
