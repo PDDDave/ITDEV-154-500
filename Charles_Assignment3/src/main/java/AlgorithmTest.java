@@ -24,7 +24,7 @@ public class AlgorithmTest {
     private ArrayList<Integer> list100 = new ArrayList();
     private ArrayList<Integer> list1k = new ArrayList();
     
-    public AlgorithmTest (){
+    public void go() {
         PopulateStructure(arr100);
         PopulateStructure(arr1k);
         
@@ -40,15 +40,13 @@ public class AlgorithmTest {
         System.out.println(InsertionSortTest(arr100, list100));
         System.out.println(InsertionSortTest(arr1k, list1k));
     }
-
+    
     private void PopulateStructure(Integer[] arr) {
         Random rand = new Random();
         for(int i =0; i < arr.length; i++){
             arr[i] = rand.nextInt(UPPER_BOUND);
         }
     }
-
-
 
     public List getList100() {
         return list100;
@@ -219,6 +217,5 @@ public class AlgorithmTest {
         int temp = list.get(minDex);
         list.set(minDex, list.get(o));
         list.set(o, temp);      
-    }
-    
+    }    
 }

@@ -14,8 +14,8 @@ public class NewMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Controller control = new Controller();
-        control.Start();
+       AlgorithmTest test = new AlgorithmTest();
+       test.go();
     }
     
 }
