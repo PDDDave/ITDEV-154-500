@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,11 +17,12 @@ import java.util.Random;
  * @author David
  */
 public class AlgorithmTest {
+    private Scanner keyboard = new Scanner(System.in);
     private final int UPPER_BOUND = 100;
     private Integer[] arr100 = new Integer[100];  //have to use Integer instead of int due to "confusing primitive array argument to varargs method" error.
     private Integer[] arr1k = new Integer[1000];  //the above error caused my lists to not print as expected, see https://stackoverflow.com/questions/25409103/why-does-netbeans-warn-about-passing-int-to-vararg
-    private ArrayList<String> list100 = new ArrayList();
-    private ArrayList<String> list1k = new ArrayList();
+    private ArrayList<Integer> list100 = new ArrayList();
+    private ArrayList<Integer> list1k = new ArrayList();
     
     public AlgorithmTest (){
         PopulateStructure(arr100);
@@ -29,8 +31,14 @@ public class AlgorithmTest {
         CopyData(arr100,list100);
         CopyData(arr1k, list1k);
         
-        TimeTest(arr100,list100);
-        //TimeTest(arr1k, list1k);
+        System.out.println(SelectSortTest(arr100,list100));
+        System.out.println(SelectSortTest(arr1k, list1k));
+        
+        System.out.println("Press Enter to continue");
+        keyboard.nextLine();
+        
+        System.out.println(InsertionSortTest(arr100, list100));
+        System.out.println(InsertionSortTest(arr1k, list1k));
     }
 
     private void PopulateStructure(Integer[] arr) {
@@ -60,10 +68,13 @@ public class AlgorithmTest {
 
     private void CopyData(Integer[] arr, List list) {
         Collections.addAll(list, arr);
-        //System.out.println(list.toString());
-        /*list.forEach(element ->{
-            System.out.println(element);
-        });*/
+        
+        String m = arr.length + " length Array: \n" + Arrays.toString(arr)+"\n\n"
+                + list.size() + " length ArrayList: \n" + list.toString();
+        
+        System.out.println(m);
+        System.out.println("Press Enter to continue..");
+        keyboard.nextLine();
     }
 
     public Integer[] getArr100() {
@@ -82,21 +93,63 @@ public class AlgorithmTest {
         this.arr1k = arr1k;
     }
 
-    private void TimeTest(Integer[] arr, ArrayList<String> list) {
+    private String SelectSortTest(Integer[] arr, ArrayList<Integer> list) {
         String result;
         String m;
         long start, stop;
         long delta;
         double seconds;
+        
+        //time arr
         start = System.nanoTime();
         result = SelectSort(arr);
         stop = System.nanoTime();
         delta = (stop - start);
         seconds = (double) delta / 1_000_000_000.0;
-        m = "\n\nThe " + arr.length + " entry array took " + seconds + " to sort.\n"
-                + "The " + list.size() + " entry list took " + seconds + "to sort.";
-        System.out.println(m);
+        m = "\n\nThe " + arr.length + " entry Array took " + seconds + " for selection Sort:\n"
+                + result + "\n\n";
         
+        
+        //time list
+        start = System.nanoTime();
+        result = SelectSort(list);
+        stop = System.nanoTime();
+        delta = (stop - start);
+        seconds = (double) delta / 1_000_000_000.0;
+        m += "The " + list.size() + " entry ArrayList took " + seconds + " for selection sort:\n"
+                + result + "\n\n";
+        
+        return m;
+        
+    }
+    
+    private String InsertionSortTest(Integer[] arr, ArrayList<Integer> list){
+        String result;
+        String m;
+        long start, stop;
+        long delta;
+        double seconds;
+        
+        //time arr
+        start = System.nanoTime();
+        result = InsertionSort(arr);
+        stop = System.nanoTime();
+        delta = (stop - start);
+        seconds = (double) delta / 1_000_000_000.0;
+        m = "\n\nThe " + arr.length + " entry Array took " + seconds + " for insertion Sort:\n"
+                + result + "\n\n";
+        
+        
+        //time list
+        start = System.nanoTime();
+        result = InsertionSort(list);
+        stop = System.nanoTime();
+        delta = (stop - start);
+        seconds = (double) delta / 1_000_000_000.0;
+        m += "The " + list.size() + " entry ArrayList took " + seconds + " for insertion sort:\n"
+                + result + "\n\n";
+        
+        return m;
     }
     
     private String SelectSort(Integer [] arr) {
@@ -111,15 +164,61 @@ public class AlgorithmTest {
                 }
             }
             if(minDex !=j)
-            swap(minDex, j, arr);
+            SelSwap(minDex, j, arr);
         }
         return Arrays.toString(arr);
     }
+    
+        private String SelectSort(ArrayList<Integer> list) {
+        
+        
+        for(int j=0;j <= list.size() -1; j++){
+            int minDex = j;
+            
+            for (int i = j + 1; i < list.size(); i++){
+                if (list.get(i) < list.get(minDex)){
+                    minDex = i;
+                }
+            }
+            if(minDex !=j)
+            SelSwap(minDex, j, list);
+        }
+        return list.toString();
+    }
+        
+    private String InsertionSort(Integer[] arr){
+        for(int i = 1; i < arr[i -1]; i++ ){
+            int j = i;
+            
+            while(j > 0 && arr[j - 1] > arr[j]){
+                SelSwap (i,j,arr);
+            }
+        }
+        
+        return Arrays.toString(arr);
+    }
+    
+    private String InsertionSort(ArrayList<Integer> list){
+        for (int i = 1; i < list.get(i -1); i++){
+            int j = i;
+            
+            while(j > 0 && list.get(i -1) > list.get(i)){
+                SelSwap(i,j,list);
+            }
+        }
+        return list.toString();
+    }
 
-    private void swap(int minDex, int o, Integer[] arr) {
+    private void SelSwap(int minDex, int o, Integer[] arr) {
         int temp = arr[minDex];
         arr[minDex] = arr[o];
         arr[o] = temp;        
+    }
+    
+    private void SelSwap(int minDex, int o, ArrayList<Integer> list) {
+        int temp = list.get(minDex);
+        list.set(minDex, list.get(o));
+        list.set(o, temp);      
     }
     
 }
