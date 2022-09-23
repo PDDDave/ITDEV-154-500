@@ -1,6 +1,7 @@
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -18,8 +19,8 @@ public class AlgorithmTest {
     private final int UPPER_BOUND = 100;
     private Integer[] arr100 = new Integer[100];  //have to use Integer instead of int due to "confusing primitive array argument to varargs method" error.
     private Integer[] arr1k = new Integer[1000];  //the above error caused my lists to not print as expected, see https://stackoverflow.com/questions/25409103/why-does-netbeans-warn-about-passing-int-to-vararg
-    private List<String> list100 = new LinkedList();
-    private List<String> list1k = new LinkedList();
+    private ArrayList<String> list100 = new ArrayList();
+    private ArrayList<String> list1k = new ArrayList();
     
     public AlgorithmTest (){
         PopulateStructure(arr100);
@@ -29,7 +30,7 @@ public class AlgorithmTest {
         CopyData(arr1k, list1k);
         
         TimeTest(arr100,list100);
-        TimeTest(arr1k, list1k);
+        //TimeTest(arr1k, list1k);
     }
 
     private void PopulateStructure(Integer[] arr) {
@@ -45,7 +46,7 @@ public class AlgorithmTest {
         return list100;
     }
 
-    public void setList100(List list100) {
+    public void setList100(ArrayList list100) {
         this.list100 = list100;
     }
 
@@ -53,15 +54,16 @@ public class AlgorithmTest {
         return list1k;
     }
 
-    public void setList1k(List list1k) {
+    public void setList1k(ArrayList list1k) {
         this.list1k = list1k;
     }
 
     private void CopyData(Integer[] arr, List list) {
         Collections.addAll(list, arr);
-        list.forEach(element ->{
+        //System.out.println(list.toString());
+        /*list.forEach(element ->{
             System.out.println(element);
-        });
+        });*/
     }
 
     public Integer[] getArr100() {
@@ -80,8 +82,44 @@ public class AlgorithmTest {
         this.arr1k = arr1k;
     }
 
-    private void TimeTest(Integer[] arr100, List<String> list100) {
+    private void TimeTest(Integer[] arr, ArrayList<String> list) {
+        String result;
+        String m;
+        long start, stop;
+        long delta;
+        double seconds;
+        start = System.nanoTime();
+        result = SelectSort(arr);
+        stop = System.nanoTime();
+        delta = (stop - start);
+        seconds = (double) delta / 1_000_000_000.0;
+        m = "\n\nThe " + arr.length + " entry array took " + seconds + " to sort.\n"
+                + "The " + list.size() + " entry list took " + seconds + "to sort.";
+        System.out.println(m);
         
+    }
+    
+    private String SelectSort(Integer [] arr) {
+        
+        
+        for(int j=0;j <= arr.length -1; j++){
+            int minDex = j;
+            
+            for (int i = j + 1; i < arr.length; i++){
+                if (arr[i] < arr[minDex]){
+                    minDex = i;
+                }
+            }
+            if(minDex !=j)
+            swap(minDex, j, arr);
+        }
+        return Arrays.toString(arr);
+    }
+
+    private void swap(int minDex, int o, Integer[] arr) {
+        int temp = arr[minDex];
+        arr[minDex] = arr[o];
+        arr[o] = temp;        
     }
     
 }
