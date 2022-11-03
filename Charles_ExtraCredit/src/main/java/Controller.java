@@ -127,8 +127,8 @@ public class Controller {
         return RAND_ARR_UP_BOUND;
     }
 
-    public int getRAND_ARR_LOW_UP() {
-        return RAND_ARR_LOW_UP;
+    public int getRAND_ARR_LOW() {
+        return RAND_ARR_LOW;
     }
 
     
