@@ -25,22 +25,45 @@ public class Algorithms {
     }
 
     public String testOne(int[] arr10, int[] arr100, int[] arr1k) {
+        String msg = "";
+        String before = "Before:\n";
+        String after = "\nAfter:\n";
+        String line = "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
         
-        System.out.println("Before:");
-        System.out.println(Arrays.toString(arr10));
-        
+        msg += (before + Arrays.toString(arr10));
         quickSort(arr10, 0, arr10.length -1);
+        msg+= (after + Arrays.toString(arr10) + line);
         
-        System.out.println("After:");
-        System.out.println(Arrays.toString(arr10));
-        //quickSort(arr100, arr100[0], arr100.length -1, arr100.length);
-        //quickSort(arr1k, arr1k[0], arr1k.length -1, arr1k.length);
+        msg += (before + Arrays.toString(arr100));
+        quickSort(arr100, 0, arr100.length -1);
+        msg+= (after + Arrays.toString(arr100) + line);
         
-        return "";
+        msg += (before + Arrays.toString(arr1k));
+        quickSort(arr1k, 0, arr1k.length -1);
+        msg+= (after + Arrays.toString(arr1k) + line);
+
+        return msg;
     }
 
-    String testTwo() {
-        return "TEST TWO!!";
+    String testTwo(int[] arrOne, int[] arrTwo,int[] arrThree) {
+        String msg = "";
+        String before = "Before:\n";
+        String after = "\nAfter:\n";
+        String line = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
+        
+        msg += ("Array size: " + Integer.toString(arrOne.length) + "\n" +before + Arrays.toString(arrOne));
+        quickSort(arrOne, 0, arrOne.length -1);
+        msg+= (after + Arrays.toString(arrOne) + line);
+        
+        msg += ("Array size: " + Integer.toString(arrTwo.length) + "\n" +before + Arrays.toString(arrTwo));
+        quickSort(arrTwo, 0, arrTwo.length -1);
+        msg+= (after + Arrays.toString(arrTwo) + line);
+        
+        msg += ("Array size: " + Integer.toString(arrThree.length) + "\n" +before + Arrays.toString(arrThree));
+        quickSort(arrThree, 0, arrThree.length -1);
+        msg+= (after + Arrays.toString(arrThree) + line);
+
+        return msg;
     }
 
     private void quickSort(int[] array, int lowIndex, int highIndex) {

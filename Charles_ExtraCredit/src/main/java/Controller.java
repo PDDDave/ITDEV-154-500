@@ -40,7 +40,7 @@ public class Controller {
                    view.printString(algs.testOne(arr10, arr100, arr1k));
                    break;
                case "2":
-                   view.printString(algs.testTwo());
+                   view.printString(algs.testTwo(randArrOne, randArrTwo, randArrThree));
                    break;
                case "999":
                    view.bye();
@@ -59,17 +59,19 @@ public class Controller {
        algs.populateStructure(arr100, ARR_CONTENT_BOUND);
        algs.populateStructure(arr1k, ARR_CONTENT_BOUND);
        
-       createRandomArray(randArrOne);
-       createRandomArray(randArrTwo);
-       createRandomArray(randArrThree);
+       randArrOne = createRandomArray();
+       randArrTwo = createRandomArray();
+       randArrThree = createRandomArray();
     }
 
-    private void createRandomArray(int[] randomArray) {
+    private int[] createRandomArray() {
+        int[] randomArray;
         Random rand = new Random();
         int arrSize = rand.nextInt(RAND_ARR_UP_BOUND - RAND_ARR_LOW) + RAND_ARR_LOW; //generates number between  RAND_ARR_LOW and RAND_ARR_LOW_UP
         randomArray = new int[arrSize];
         
         algs.populateStructure(randomArray, ARR_CONTENT_BOUND);
+        return randomArray;
     }
 
     public int getARR_CONTENT_BOUND() {
