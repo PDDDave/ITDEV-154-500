@@ -40,14 +40,18 @@ public class View {
         return keyboard.nextLine().toLowerCase();
     }
     
+    public void salutation(){
+        String str ="Welcome to the Extra Credit app!";
+        
+        printString(str);
+    }
     public void welcome(){
-        String m = "Welcome to the Extra Credit app!\n"
-                + "Which Experiment would you like to run? *Enter corresponding number 1|2  Enter 999 to QUIT*\n"
+        String str = "\n\nWhich Experiment would you like to run? *Enter corresponding number 1|2  Enter 999 to QUIT*\n\n"
                 + "1. Using arrays of size 10,100, and 100\n"
                 + "2. Using three arrays of random size between 100 and 1000";
                
         
-        printString(m);
+        printString(str);
     }
 
     public void bye() {
